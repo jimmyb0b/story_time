@@ -9,7 +9,6 @@ var app = http.createServer(function (req, res) {
 });
 
 var io = require('socket.io').listen(app);
-
 io.sockets.on('connection', function (socket){
 
   // convenience function to log server messages on the client
