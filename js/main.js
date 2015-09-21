@@ -74,14 +74,14 @@ socket.on('log', function (array){
 ////////////////////////////////////////////////
 
 function sendMessage(message){
-	console.log('Sending message: ', message);
+  console.log('Sending message: ', message);
   socket.emit('message', message);
 }
 
 socket.on('message', function (message){
   console.log('Received message:', message);
   if (message === 'got user media') {
-  	maybeStart();
+    maybeStart();
   } else if (message.type === 'offer') {
     if (!isInitiator && !isStarted) {
       maybeStart();
@@ -139,7 +139,7 @@ function maybeStart() {
 }
 
 window.onbeforeunload = function(e){
-	sendMessage('bye');
+  sendMessage('bye');
 }
 
 /////////////////////////////////////////////////////////
@@ -307,7 +307,7 @@ function requestTurn(turn_url) {
     xhr.onreadystatechange = function(){
       if (xhr.readyState === 4 && xhr.status === 200) {
         var turnServer = JSON.parse(xhr.responseText);
-      	console.log('Got TURN server: ', turnServer);
+        console.log('Got TURN server: ', turnServer);
         pc_config.iceServers.push({
           'url': 'turn:' + turnServer.username + '@' + turnServer.turn,
           'credential': turnServer.password

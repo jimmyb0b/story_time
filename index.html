@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
-  <title>Chat</title>
+  <title>Read To Me</title>
+  <base target='_blank'>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -36,26 +36,33 @@
               <option value="clifford_the_big_red_dog">Clifford the Big Red Dog</option>  
             </select>
             <br>
-            <button id="startButton">Start</button>
-            <button id="stopButton">Stop</button>
           </div> 
-          <div id="video-player" class="pure-u-1">
-            <video id="localVideo" autoplay muted></video>
-          </div>
+          <div id="videos">
+            <div>   
+              <button id="startButton">Start</button>
+              <button id="stopButton">Stop</button>
+            </div>
+            <div id="video-player" class="pure-u-1">
+              <video id="localVideo" autoplay muted></video>
+            </div>
 
-          <div>
-            <button id="callButton">Call</button>
-            <button id="hangupButton">Hang Up</button>
-          </div>
+            <div>
+              <button id="callButton">Call</button>
+              <button id="hangupButton">Hang Up</button>
+            </div>
 
-          <div id="video-player" class="pure-u-1">
-            <video id="remoteVideo" autoplay></video>
-          </div>
+            <div id="video-player" class="pure-u-1">
+              <video id="remoteVideo" autoplay></video>
+            </div>
 
+          </div>
         </div>
 
-
-  <button id="sendButton" disabled>Send</button>
+        <div id='textareas'>
+          <textarea id="dataChannelSend" disabled placeholder="Enter some text, then press Send."></textarea>
+          <textarea id="dataChannelReceive" disabled></textarea>
+        </div>
+        <button id="sendButton" disabled>Send</button>
       </div>
     </div>
 
