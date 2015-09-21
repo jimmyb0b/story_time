@@ -3,10 +3,10 @@
 
 Technologies used:
 
-Javascript
-WebRTC
-Express
-Node-Static
+Javascript <br>	
+WebRTC <br>
+Express <br>
+Node-Static <br>
 Turn.js
 
 
