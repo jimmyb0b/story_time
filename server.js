@@ -8,25 +8,19 @@ var app = http.createServer(function (req, res) {
 	console.log('listen on 4-thou')
 });
 
-
 var io = require('socket.io').listen(app);
-
 io.sockets.on('connection', function (socket){
 
   // convenience function to log server messages on the client
 	function log(){
-		var array = [">>> Message from server: "];
-	  for (var i = 0; i < arguments.length; i++) {
-	  	array.push(arguments[i]);
+		var array = [];
+		console.log(array)
+	  for (var i = 0; i < users.length; i++) {
+	  	array.push(users[i]);
 	  }
 	    socket.emit('log', array);
 	}
 
-	// socket.on('message', function (message) {
-	// 	log('Got message:', message);
- //    // for a real app, would be room only (not broadcast)
-	// 	socket.broadcast.emit('message', message);
-	// });
 
 	socket.on('create or join', function (room) {
 		var numClients = io.sockets.clients(room).length;

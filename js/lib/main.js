@@ -1,17 +1,26 @@
-(function($) {
+var isInitiator;
 
+var socket = io.connect();
 
-var tyroneBook = $(
-	
-	)
+if (room !== "") {
+  console.log('Joining room ' + room);
+  socket.emit('create or join', room);
+}
 
-var chooseBook	= $('#book-select').val()
-console.log(chooseBook)
-	if (chooseBook === 'tyrone_the_horrible'){
-		$('.book-content').append(tyroneBook)
-	}else if (chooseBook === 'clifford_the_big_red_dog'){
-		$('.book-content').append()
-	}
+socket.on('full', function (room){
+  console.log('Room ' + room + ' is full');
+});
 
+socket.on('empty', function (room){
+  isInitiator = true;
+  console.log('Room ' + room + ' is empty');
+});
 
-})(jQuery)
+socket.on('join', function (room){
+  console.log('Making request to join room ' + room);
+  console.log('You are the initiator!');
+});
+
+socket.on('log', function (array){
+  console.log.apply(console, array);
+});
