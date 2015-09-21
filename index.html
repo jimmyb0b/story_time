@@ -40,7 +40,7 @@
             <button id="stopButton">Stop</button>
           </div> 
           <div id="video-player" class="pure-u-1">
-            <video id="localVideo" autoplay ></video>
+            <video id="localVideo" autoplay muted></video>
           </div>
 
           <div>
@@ -53,15 +53,18 @@
           </div>
 
         </div>
+
+
+  <button id="sendButton" disabled>Send</button>
       </div>
     </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src='js/lib/adapter.js'></script>
-    <script src='js/lib/call.js'></script>
     <script src='js/lib/turn.js'></script>
-    <script src='js/lib/main.js'></script>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='js/lib/adapter.js'></script>
+    <script src='js/main.js'></script>
     <script type="text/javascript">
     $("#flipbook").turn({
       autoCenter: true

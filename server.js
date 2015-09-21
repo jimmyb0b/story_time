@@ -1,19 +1,26 @@
-console.log("something")
 var static = require('node-static');
 var http = require('http');
 var file = new(static.Server)();
 var app = http.createServer(function (req, res) {
   file.serve(req, res);
-}).listen(4000, function(){
-	console.log('listen on 4-thou')
-});
+}).listen(4000)
+
+// var express = require('express');
+// var app = express();
+// console.log(express.static(__dirname + '/js'));
+// app.use(express.static(__dirname + '/js'));
+// app.all('*', function(req, res){
+// 	res.sendfile("index.html");
+// });
+
+// app.listen(9000);
+
 
 var io = require('socket.io').listen(app);
 io.sockets.on('connection', function (socket){
 
-  // convenience function to log server messages on the client
 	function log(){
-		var array = [">>> Message from server: "];
+		var array = [">>> "];
 	  for (var i = 0; i < arguments.length; i++) {
 	  	array.push(arguments[i]);
 	  }
@@ -21,21 +28,20 @@ io.sockets.on('connection', function (socket){
 	}
 
 	socket.on('message', function (message) {
-		log('Got message:', message);
-    // for a real app, would be room only (not broadcast)
-		socket.broadcast.emit('message', message);
+		log('Got message: ', message);
+		socket.broadcast.emit('message', message); // should be room only
 	});
 
 	socket.on('create or join', function (room) {
 		var numClients = io.sockets.clients(room).length;
 
 		log('Room ' + room + ' has ' + numClients + ' client(s)');
-		log('Request to create or join room ' + room);
+		log('Request to create or join room', room);
 
-		if (numClients === 0){
+		if (numClients == 0){
 			socket.join(room);
 			socket.emit('created', room);
-		} else if (numClients === 1) {
+		} else if (numClients == 1) {
 			io.sockets.in(room).emit('join', room);
 			socket.join(room);
 			socket.emit('joined', room);
@@ -48,3 +54,4 @@ io.sockets.on('connection', function (socket){
 	});
 
 });
+
