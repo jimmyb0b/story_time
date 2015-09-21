@@ -1,5 +1,5 @@
 *{
-    border:1px solid red;
+   /* border:1px solid red;*/
     /*padding: 5px;*/
 }
 
@@ -11,6 +11,24 @@ body{
     background-repeat: false;
     
 }
+
+.wrapper{
+    display: inline;
+    top: 0;
+}
+
+.middle{
+    display: inline;
+    top: 50%;
+    position: relative;
+}
+
+.inner{
+    display: inline;
+    top: -50%;
+    position: relative;
+}
+
 
 #video-player{
     width: 100%;
@@ -27,17 +45,28 @@ body{
     height: auto;
 }
 
-/*.book-content{
-    position: fixed;
-
-}*/
 
 #flipbook{
     width:100%;
-    height: auto;
+    height: 600px;
 }
 
 #page{
     width: 100%;
     height: auto;
 }
+
+.book-content{
+    padding: 10px;    
+}
+
+.video-area{
+    padding: 10px;
+}
+
+
+
+
+
+
+

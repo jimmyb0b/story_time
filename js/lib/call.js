@@ -44,7 +44,7 @@ function stop(){
   trace("Ending local stream")
   startButton.disabled = false
   stopButton.disabled = true
-  gotStream.stop()
+  localStream.stop()
 }
 
 function call() {
@@ -96,8 +96,9 @@ function hangup() {
   remotePeerConnection = null;
   hangupButton.disabled = true;
   callButton.disabled = false;
+  startButton.disabled = false
   localStream.stop() //shuts 
-  gotStream.stop()
+  localStream.stop()
 }
 
 function gotRemoteStream(event){
