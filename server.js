@@ -20,6 +20,7 @@ var app = http.createServer(function (req, res) {
 var io = require('socket.io').listen(app);
 io.sockets.on('connection', function (socket){
 
+
 	function log(){
 		var array = [">>> "];
 	  for (var i = 0; i < arguments.length; i++) {
@@ -33,12 +34,15 @@ io.sockets.on('connection', function (socket){
 		socket.broadcast.emit('message', message); // should be room only
 	});
 
+	//------------create room join existing room------------//
 	socket.on('create or join', function (room) {
 		var numClients = io.sockets.clients(room).length;
 
 		log('Room ' + room + ' has ' + numClients + ' client(s)');
 		log('Request to create or join room', room);
 
+
+		//------------limiting number of users per room-------------//
 		if (numClients == 0){
 			socket.join(room);
 			socket.emit('created', room);
@@ -49,6 +53,8 @@ io.sockets.on('connection', function (socket){
 		} else { // max two clients
 			socket.emit('full', room);
 		}
+
+		//-------------broadcasting video ----------------//
 		socket.emit('emit(): client ' + socket.id + ' joined room ' + room);
 		socket.broadcast.emit('broadcast(): client ' + socket.id + ' joined room ' + room);
 
