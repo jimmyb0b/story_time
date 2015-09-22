@@ -2,10 +2,10 @@
 
 var sendChannel;
 var sendButton = document.getElementById("sendButton");
-var sendTextarea = document.getElementById("dataChannelSend");
-var receiveTextarea = document.getElementById("dataChannelReceive");
 
 sendButton.onclick = sendData;
+// var sendTextarea = document.getElementById("dataChannelSend");
+// var receiveTextarea = document.getElementById("dataChannelReceive");
 
 var isChannelReady;
 var isInitiator;
@@ -15,6 +15,9 @@ var pc;
 var remoteStream;
 var turnReady;
 
+////////////////////////////////////////
+//---------decide what browser -------------//
+/////////////////////////////////////////
 var pc_config = webrtcDetectedBrowser === 'firefox' ?
   {'iceServers':[{'url':'stun:23.21.150.121'}]} : // number IP
   {'iceServers': [{'url': 'stun:stun.l.google.com:19302'}]};
@@ -25,13 +28,17 @@ var pc_constraints = {
     {'RtpDataChannels': true}
   ]};
 
+/////////////////////////////////////////
+//-----------get audio video-----------//
 // Set up audio and video regardless of what devices are present.
 var sdpConstraints = {'mandatory': {
   'OfferToReceiveAudio':true,
   'OfferToReceiveVideo':true }};
 
 /////////////////////////////////////////////
-
+//----------find a room and connect----------------//
+// ------------ one set for demo------------//
+////////////////////////////////////
 var room = location.pathname.substring(1);
 if (room === '') {
 //  room = prompt('Enter room name:');
@@ -101,6 +108,9 @@ socket.on('message', function (message){
 
 ////////////////////////////////////////////////////
 
+//------------------ handle video stream ----------//
+//////////////////////////////////////////
+
 var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
 
@@ -143,6 +153,9 @@ window.onbeforeunload = function(e){
 }
 
 /////////////////////////////////////////////////////////
+
+//---------------connect users--------------//
+//////////////////////////////////////
 
 function createPeerConnection() {
   try {
@@ -327,6 +340,10 @@ function handleRemoteStreamAdded(event) {
   remoteStream = event.stream;
 //  waitForRemoteVideo();
 }
+
+
+/////////////////////////////////////
+//---------handle disconnect--------//
 function handleRemoteStreamRemoved(event) {
   console.log('Remote stream removed. Event: ', event);
 }
